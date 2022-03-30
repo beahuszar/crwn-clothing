@@ -1,4 +1,5 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
+import {createUserDocumentFromAuth, onAuthStateChangedListener} from "../utils/firebase/firebase.utils";
 
 /*
 * This will create a React context provider component (see below)
@@ -20,6 +21,21 @@ export const UserProvider = ({ children }) => {
   * */
   const value = { currentUser, setCurrentUser };
   
+  // componentDidMount
+  /*
+  * i.e.: componentDidMount
+  * onAuthChange returns an unsubscribe method
+  * useEffect return is called whenever component unmounts -> good for clearing up such listeners
+  * */
+  useEffect(() => {
+   const unsubscribe = onAuthStateChangedListener((user) => {
+     if (user) {
+       createUserDocumentFromAuth(user);
+     }
+     setCurrentUser(user);
+   });
+   return unsubscribe;
+  }, []);
   
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 };
