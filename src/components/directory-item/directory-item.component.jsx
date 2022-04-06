@@ -1,18 +1,18 @@
 import React from "react";
-import "./directory-item.styles.scss";
+import {DirectoryItemContainer, BackgroundImage, ItemBody} from "./directory-item.styles";
 
 const DirectoryItem = ({ category }) => {
   const { imageUrl, title } = category;
   return (
-    <div className='directory-item-container'>
-      <div className='background-image' style={{
+    <DirectoryItemContainer>
+      <BackgroundImage style={{
         backgroundImage: `url(${imageUrl})`
       }}/>
-      <div className='body'>
+      <ItemBody>
         <h2>{title}</h2>
         <p>Shop Now</p>
-      </div>
-    </div>
+      </ItemBody>
+    </DirectoryItemContainer>
   )
 };
 
