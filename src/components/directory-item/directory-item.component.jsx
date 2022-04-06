@@ -1,5 +1,5 @@
 import React from "react";
-import {DirectoryItemContainer, BackgroundImage, ItemBody} from "./directory-item.styles";
+import {BackgroundImage, DirectoryItemContainer, ItemBody} from "./directory-item.styles";
 
 const DirectoryItem = ({ category }) => {
   const { imageUrl, title } = category;

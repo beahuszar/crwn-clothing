@@ -1,4 +1,4 @@
-import {Group, FormInputStyle, FormInputLabel, Shrink} from "./form-input.styles";
+import {FormInputLabel, FormInputStyle, Group} from "./form-input.styles";
 
 const FormInput = ({ label, ...otherProps }) => {
   return (
