@@ -22,15 +22,3 @@ export const ItemCount = styled.span`
   font-weight: bold;
   bottom: 12px;
 `;
-
-/*.cart-icon-container {
-
-
-  .shopping-icon {
-
-  }
-
-  .item-count {
-
-  }
-}*/
