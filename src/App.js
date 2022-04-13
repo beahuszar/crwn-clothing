@@ -11,7 +11,6 @@ import {useDispatch} from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  // componentDidMount
   /*
   * i.e.: componentDidMount
   * onAuthChange returns an unsubscribe method
