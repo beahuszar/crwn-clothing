@@ -3,7 +3,7 @@ import CategoriesPreview from "../categories-preview/categories-preview.componen
 import Category from "../category/category.component";
 import {useEffect} from "react";
 import {getCategoriesAndDocuments} from "../../utils/firebase/firebase.utils";
-import {setCategoriesMap} from "../../store/categories/category.action";
+import {setCategories} from "../../store/categories/category.action";
 import {useDispatch} from "react-redux";
 
 const Shop = () => {
@@ -16,8 +16,8 @@ const Shop = () => {
      * has to be made inside of ot
      * */
     const getCategoriesMap = async () => {
-      const categoryMap = await getCategoriesAndDocuments();
-      dispatch(setCategoriesMap(categoryMap));
+      const categoriesArray = await getCategoriesAndDocuments();
+      dispatch(setCategories(categoriesArray));
     };
     
     getCategoriesMap();
