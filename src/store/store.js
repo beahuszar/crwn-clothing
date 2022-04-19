@@ -3,10 +3,11 @@ import {rootReducer} from "./root-reducer";
 import logger from "redux-logger";
 import storage from "redux-persist/lib/storage"
 import {persistReducer, persistStore} from "redux-persist";
+import thunk from "redux-thunk";
 /**
  * run before the action hits the reducer when it has been dispatched
  * */
-const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(Boolean);
+const middleWares = [process.env.NODE_ENV !== "production" && logger, thunk].filter(Boolean);
 
 const persistConfig = {
   key: "root",
