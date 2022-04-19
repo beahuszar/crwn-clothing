@@ -12,7 +12,9 @@ const middleWares = [process.env.NODE_ENV !== "production" && logger, thunk].fil
 const persistConfig = {
   key: "root",
   storage, // localStorage
-  blacklist: ['user'] // dont persist user reducer, because it is coming from our auth state listener
+  whitelist: ['user']
+  // dont persist categories reducer, because it is handled with spinner and async redux
+  // dont persist user reducer, because it is coming from our auth state listener
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
