@@ -9,7 +9,7 @@ import {rootSaga} from "./root-saga";
 const persistConfig = {
   key: "root",
   storage, // localStorage
-  whitelist: ['user']
+  whitelist: ['cart']
   // dont persist categories reducer, because it is handled with spinner and async redux
   // dont persist user reducer, because it is coming from our auth state listener
 };
