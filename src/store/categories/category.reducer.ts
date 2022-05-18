@@ -17,11 +17,11 @@ export const CATEGORIES_INITIAL_STATE: CategoriesState = {
 
 /**
  * Type safer, in prev version, default "state" return type could have been deleted without errors, which can lead to
- * runtime errors
+ * runtime errors + with the help of the matcher, the condition check will be dynamic
  * */
 export const categoriesReducer = (
     state = CATEGORIES_INITIAL_STATE,
-    action = {} as AnyAction
+    action: AnyAction
 ): CategoriesState => {
   if (fetchCategoriesStart.match(action)) {
     return {...state, isLoading: true};
