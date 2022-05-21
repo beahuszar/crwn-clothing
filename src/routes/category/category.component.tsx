@@ -6,17 +6,21 @@ import {useSelector} from "react-redux";
 import {selectCategoriesMap, selectCategoriesIsLoading} from "../../store/categories/category.selector";
 import Spinner from "../../components/spinner/spinner.component";
 
+type CategoryRouteParams = {
+  category: string;
+}
+
 const Category = () => {
   // useParams retrieves value from the value added to Route path=":abcd"
-  const {category} = useParams();
+  const {category} = useParams<keyof CategoryRouteParams>() as CategoryRouteParams;
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);
-  
+
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
-  
+
   return (
     <Fragment>
       <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
