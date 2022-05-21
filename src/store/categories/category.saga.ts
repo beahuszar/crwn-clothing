@@ -1,15 +1,16 @@
-import {all, call, put, takeLatest} from "redux-saga/effects"
+import {all, call, put, takeLatest} from "typed-redux-saga"
 import {getCategoriesAndDocuments} from "../../utils/firebase/firebase.utils";
 import {CATEGORIES_ACTION_TYPES} from "./category.types";
 import {fetchCategoriesFailure, fetchCategoriesSuccess} from "./category.action";
 
 export function* fetchCategoriesAsync() {
   try {
-    const categoriesArray = yield call(getCategoriesAndDocuments, 'categories');
+    // yield* = typed-redux-saga handles the generators and their "typings"
+    const categoriesArray = yield* call(getCategoriesAndDocuments);
     // put === generator version of dispatch
-    yield put(fetchCategoriesSuccess(categoriesArray));
+    yield* put(fetchCategoriesSuccess(categoriesArray));
   } catch (error) {
-    yield put(fetchCategoriesFailure(error));
+    yield* put(fetchCategoriesFailure(error as Error));
   }
 }
 
