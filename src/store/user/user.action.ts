@@ -1,6 +1,7 @@
 import {Action, ActionWithPayload, createAction, withMatcher} from "../../utils/reducer/reducer.utils";
 import {USER_ACTION_TYPES} from "./user.types";
 import {UserData, AdditionalInformation} from "../../utils/firebase/firebase.utils";
+import {User} from "firebase/auth";
 
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
 export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, UserData>;
@@ -9,7 +10,7 @@ export type EmailSignInStart = ActionWithPayload<USER_ACTION_TYPES.EMAIL_SIGN_IN
 export type SignUpStart = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_START, { email: string, password: string, displayName: string }>
 export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>;
 export type SignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, Error>;
-export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: UserData, additionalDetails: AdditionalInformation}>;
+export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: User, additionalDetails: AdditionalInformation}>;
 export type SignUpFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_FAILED, Error>;
 export type SignOutStart = Action<USER_ACTION_TYPES.SIGN_OUT_START>;
 export type SignOutSuccess = Action<USER_ACTION_TYPES.SIGN_OUT_SUCCESS>;
@@ -35,7 +36,8 @@ export const emailSignInStart = withMatcher(
 );
 
 export const signInSuccess = withMatcher(
-    (user: UserData): SignInSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user)
+                // id is added separately in user.saga
+    (user: UserData & {id: string}): SignInSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user)
 );
 
 export const signInFailed = withMatcher(
@@ -52,7 +54,7 @@ export const signUpStart = withMatcher(
 
 export const signUpSuccess = withMatcher(
     (
-        user: UserData,
+        user: User,
         additionalDetails: AdditionalInformation
     ): SignUpSuccess => createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user, additionalDetails})
 );
