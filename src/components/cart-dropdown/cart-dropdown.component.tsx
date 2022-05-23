@@ -4,15 +4,17 @@ import {useNavigate} from "react-router-dom";
 import {CartDropdownContainer, CartItems, EmptyMessage} from "./cart-dropdown.styles";
 import {useSelector} from "react-redux";
 import {selectCartItems} from "../../store/cart/cart.selector";
+import {useCallback} from "react";
 
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
-  
-  const goToCheckoutHandler = () => {
-    navigate("/checkout");
-  };
-  
+
+  // no need for dep "navigate", because it does not change ever
+  const goToCheckoutHandler = useCallback(() => {
+      navigate("/checkout");
+  }, []);
+
   return (
     <CartDropdownContainer>
       <CartItems>
